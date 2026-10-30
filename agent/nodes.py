@@ -1,6 +1,7 @@
 import json
 import re
-from typing import Dict, Any
+import importlib
+from typing import Dict, Any, List
 
 from agent.state import AgentState
 from agent.prompts import TRIAGE_PROMPT, NAVIGATION_PROMPT, CARE_SUMMARY_PROMPT
@@ -8,7 +9,6 @@ from agent.llm import LLM
 
 
 def _parse_json(text: str) -> dict:
-    """Helper to extract clean JSON even if the model outputs markdown backticks or extra text."""
     if not text:
         return {}
     text = re.sub(r"```(?:json)?", "", text)
@@ -22,30 +22,46 @@ def _parse_json(text: str) -> dict:
     return {}
 
 
-import importlib
-
 def _get_member3_tools() -> Dict[str, Any]:
-    """Dynamically load Member 3's tools without triggering VS Code import warnings."""
+    """Safely loads healthcare tools from tools/ without accidentally re-importing app.py."""
     tools = {}
-    try:
-        # Dynamic import so VS Code doesn't complain when the folder is missing
-        m3_tools = importlib.import_module("app.tools")
-        if hasattr(m3_tools, "get_tools"):
-            tools.update(m3_tools.get_tools())
-    except (ImportError, ModuleNotFoundError):
-        pass
-
-    # Fallback to local tools/ directory
     try:
         from tools import build_tools
         tools.update(build_tools())
     except Exception:
         pass
-
+    try:
+        import tools.healthcare_tools as h_tools
+        if hasattr(h_tools, "get_tools"):
+            tools.update(h_tools.get_tools())
+    except Exception:
+        pass
     return tools
 
 
-llm = LLM()
+def _check_allergy_contraindications(profile: dict, complaint: str) -> List[str]:
+    """Automated clinical safety rule: flags drug allergy risks."""
+    warnings = []
+    allergies = [str(a).lower() for a in profile.get("allergies", []) + profile.get("medical_history", [])]
+    text = complaint.lower()
+
+    if any("nsaid" in a or "aspirin" in a or "ibuprofen" in a for a in allergies):
+        if any(w in text for w in ["pain", "swelling", "knee", "joint", "headache", "fever"]):
+            warnings.append("⚠️ CONTRAINDICATION: Patient reports NSAID/Aspirin allergy. Avoid prescribing Ibuprofen/Naproxen.")
+
+    if any("penicillin" in a or "amoxicillin" in a for a in allergies):
+        warnings.append("⚠️ ALLERGY ALERT: Documented Penicillin allergy. Avoid beta-lactam antibiotics.")
+
+    return warnings
+
+
+from dotenv import load_dotenv
+load_dotenv()
+
+try:
+    llm = LLM()
+except Exception:
+    llm = None
 
 
 def triage_node(state: AgentState) -> dict:
@@ -53,7 +69,7 @@ def triage_node(state: AgentState) -> dict:
     patient_query = messages[-1]["content"] if messages else ""
     profile = state.get("patient_profile", {})
 
-    user_content = f"Patient Complaint: {patient_query}\nKnown Profile: {json.dumps(profile)}"
+    user_content = f"Patient Complaint: {patient_query}\nPatient Profile: {json.dumps(profile)}"
     try:
         reply = llm.generate(TRIAGE_PROMPT, [{"role": "user", "content": user_content}])
         data = _parse_json(reply)
@@ -61,29 +77,32 @@ def triage_node(state: AgentState) -> dict:
         data = {}
 
     urgency = str(data.get("urgency_level") or "Routine")
-    is_emergency = bool(data.get("is_emergency")) or (urgency.lower() == "emergency")
+    esi = int(data.get("esi_level") or (2 if urgency.lower() == "emergency" else 4))
+    is_emergency = bool(data.get("is_emergency")) or (esi in [1, 2]) or (urgency.lower() == "emergency")
 
     return {
         "urgency_level": urgency,
+        "esi_level": esi,
         "is_emergency": is_emergency,
         "extracted_symptoms": data.get("extracted_symptoms") or [patient_query],
-        "triage_reason": data.get("reason") or "Triage clinical assessment completed."
+        "triage_reason": data.get("reason") or f"Triage complete. Assigned ESI Level {esi}."
     }
 
 
 def emergency_halt_node(state: AgentState) -> dict:
-    symptoms = ", ".join(state.get("extracted_symptoms") or ["Acute distress"])
-    reason = state.get("triage_reason") or "Life-threatening symptoms detected."
+    esi = state.get("esi_level", 2)
+    reason = state.get("triage_reason") or "Critical life-threatening red flags detected."
 
     emergency_note = {
         "alert": "🚨 EMERGENCY MEDICAL ALERT - IMMEDIATE INTERVENTION REQUIRED 🚨",
         "status": "HALTED_FOR_SAFETY",
         "triage_level": "Emergency",
+        "esi_level": esi,
         "detected_symptoms": state.get("extracted_symptoms") or [],
         "clinical_rationale": reason,
         "recommended_action": (
-            "Please call 911 or proceed immediately to the nearest Emergency Department. "
-            "Do not wait for a regular clinic appointment."
+            "Call 911 or proceed immediately to the nearest Emergency Department. "
+            "Do not schedule standard outpatient navigation."
         )
     }
 
@@ -97,7 +116,7 @@ def navigation_node(state: AgentState) -> dict:
     symptoms = state.get("extracted_symptoms", [])
     user_content = (
         f"Symptoms: {symptoms}\n"
-        f"Triage Level: {state.get('urgency_level')}\n"
+        f"ESI Level: {state.get('esi_level', 4)}\n"
         f"Patient Profile: {json.dumps(state.get('patient_profile', {}))}"
     )
 
@@ -111,29 +130,41 @@ def navigation_node(state: AgentState) -> dict:
     if isinstance(specs, str):
         specs = [specs]
 
+    # Query Member 3's tools if available
+    tools = _get_member3_tools()
+    tool_results = {}
+    if "search_clinics" in tools:
+        try:
+            tool_results["clinics"] = tools["search_clinics"].execute(specialty=specs[0])
+        except Exception as e:
+            tool_results["error"] = str(e)
+
     return {
         "recommended_specialty": specs,
-        "navigation_advice": data.get("navigation_advice") or "Consult a healthcare provider.",
-        "tool_results": {"tools_active": list(_get_member3_tools().keys())}
+        "navigation_advice": data.get("navigation_advice") or "Consult a medical specialist.",
+        "tool_results": tool_results
     }
 
 
 def care_summary_node(state: AgentState) -> dict:
     messages = state.get("messages", [])
     query = messages[-1]["content"] if messages else ""
+    profile = state.get("patient_profile", {})
 
     specs = state.get("recommended_specialty") or ["General Practice"]
     if isinstance(specs, str):
         specs = [specs]
     primary_spec = specs[0] if specs else "General Practice"
 
+    # Automated safety check
+    safety_warnings = _check_allergy_contraindications(profile, query)
+
     user_content = (
         f"Original Complaint: {query}\n"
         f"Extracted Symptoms: {state.get('extracted_symptoms', [])}\n"
-        f"Triage Level: {state.get('urgency_level', 'Routine')}\n"
-        f"Suggested Specialties: {specs}\n"
-        f"Navigation Advice: {state.get('navigation_advice', '')}\n"
-        f"Patient History: {json.dumps(state.get('patient_profile', {}))}"
+        f"ESI Level: {state.get('esi_level', 4)}\n"
+        f"Specialties: {specs}\n"
+        f"Known Profile & Allergies: {json.dumps(profile)}"
     )
 
     try:
@@ -147,8 +178,18 @@ def care_summary_node(state: AgentState) -> dict:
             "chief_complaint": query,
             "history_of_present_illness": f"Patient presents with: {state.get('extracted_symptoms', [query])}",
             "triage_level": state.get("urgency_level", "Routine"),
+            "esi_level": state.get("esi_level", 4),
             "suggested_specialty": primary_spec,
+            "clinical_safety_warnings": safety_warnings,
             "recommended_next_steps": state.get("navigation_advice") or "Follow up with a specialist."
         }
+    else:
+        # Merge safety warnings
+        existing = summary.get("clinical_safety_warnings", [])
+        if isinstance(existing, list):
+            summary["clinical_safety_warnings"] = list(set(existing + safety_warnings))
 
-    return {"care_summary": summary}
+    return {
+        "care_summary": summary,
+        "clinical_warnings": safety_warnings
+    }

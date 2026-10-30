@@ -19,9 +19,9 @@ st.divider()
 # Sidebar: Patient Profile & Quick Demo Presets
 with st.sidebar:
     st.header("👤 Patient Profile")
-    age = st.number_input("Age", min_value=1, max_value=120, value=34)
-    gender = st.selectbox("Gender", ["Female", "Male", "Other"])
-    med_history = st.text_area("Medical History / Allergies", "No known allergies. Mild seasonal asthma.")
+    age = st.number_input("Age", min_value=1, max_value=120, value=34, key="patient_age_input")
+    gender = st.selectbox("Gender", ["Female", "Male", "Other"], key="patient_gender_select")
+    med_history = st.text_area("Medical History / Allergies", "No known allergies. Mild seasonal asthma.", key="patient_history_area")
     
     st.divider()
     st.subheader("⚡ Quick Demo Presets")

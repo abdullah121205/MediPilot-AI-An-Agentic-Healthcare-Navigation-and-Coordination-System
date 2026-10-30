@@ -12,15 +12,19 @@ class PatientProfile(TypedDict, total=False):
 
 
 class AgentState(TypedDict):
-    # Core conversation state
+    # Core conversation & patient background
     messages: Annotated[List[Dict[str, str]], operator.add]
     patient_profile: PatientProfile
 
     # Triage Agent outputs
     extracted_symptoms: List[str]
     urgency_level: str  # "Routine" | "Urgent" | "Emergency"
+    esi_level: int      # 1 (Resuscitation) to 5 (Non-urgent)
     triage_reason: str
     is_emergency: bool
+
+    # Clinical Safety & Risk
+    clinical_warnings: List[str]
 
     # Navigation Agent outputs
     recommended_specialty: List[str]
