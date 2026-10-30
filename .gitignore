@@ -4,3 +4,5 @@ venv/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+data/bookings.json
+__pycache__/

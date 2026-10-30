@@ -1,0 +1,593 @@
+{
+  "doctors": [
+    {
+      "id": "DOC001",
+      "name": "Dr. Priya Raman",
+      "specialty": "cardiology",
+      "affiliation": "Boston Heart Institute",
+      "city": "Boston",
+      "area": "Back Bay",
+      "lat": 42.3503,
+      "lng": -71.081,
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Medicare"
+      ],
+      "rating": 4.8,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Wed",
+          "Fri"
+        ],
+        "start": "09:00",
+        "end": "13:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC002",
+      "name": "Dr. James Okafor",
+      "specialty": "cardiology",
+      "affiliation": "Cambridge Health Clinic",
+      "city": "Cambridge",
+      "area": "Kendall Square",
+      "lat": 42.3629,
+      "lng": -71.0865,
+      "accepted_insurance": [
+        "Cigna",
+        "United",
+        "Blue Cross"
+      ],
+      "rating": 4.5,
+      "schedule": {
+        "days": [
+          "Tue",
+          "Thu"
+        ],
+        "start": "10:00",
+        "end": "16:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC003",
+      "name": "Dr. Emily Chen",
+      "specialty": "general practice",
+      "affiliation": "Back Bay Family Medicine",
+      "city": "Boston",
+      "area": "Back Bay",
+      "lat": 42.3516,
+      "lng": -71.075,
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "United",
+        "Blue Cross"
+      ],
+      "rating": 4.7,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "09:00",
+        "end": "17:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC004",
+      "name": "Dr. Marcus Johnson",
+      "specialty": "general practice",
+      "affiliation": "Cambridge Primary Care",
+      "city": "Cambridge",
+      "area": "Harvard Square",
+      "lat": 42.3736,
+      "lng": -71.119,
+      "accepted_insurance": [
+        "Blue Cross",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.3,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Wed",
+          "Fri"
+        ],
+        "start": "08:30",
+        "end": "14:30"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC005",
+      "name": "Dr. Sofia Alvarez",
+      "specialty": "pediatrics",
+      "affiliation": "Brookline Kids Clinic",
+      "city": "Brookline",
+      "area": "Coolidge Corner",
+      "lat": 42.3418,
+      "lng": -71.1212,
+      "accepted_insurance": [
+        "Aetna",
+        "United",
+        "Medicaid"
+      ],
+      "rating": 4.9,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Thu"
+        ],
+        "start": "09:00",
+        "end": "15:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC006",
+      "name": "Dr. Daniel Kim",
+      "specialty": "pediatrics",
+      "affiliation": "Boston Children's Associates",
+      "city": "Boston",
+      "area": "Longwood",
+      "lat": 42.3375,
+      "lng": -71.105,
+      "accepted_insurance": [
+        "Blue Cross",
+        "Cigna",
+        "Medicaid"
+      ],
+      "rating": 4.6,
+      "schedule": {
+        "days": [
+          "Tue",
+          "Wed",
+          "Fri"
+        ],
+        "start": "10:00",
+        "end": "16:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC007",
+      "name": "Dr. Aisha Rahman",
+      "specialty": "neurology",
+      "affiliation": "Longwood Neuro Center",
+      "city": "Boston",
+      "area": "Longwood",
+      "lat": 42.338,
+      "lng": -71.103,
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Medicare"
+      ],
+      "rating": 4.7,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Thu"
+        ],
+        "start": "09:00",
+        "end": "15:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC008",
+      "name": "Dr. Robert Singh",
+      "specialty": "orthopedics",
+      "affiliation": "Fenway Orthopedic Group",
+      "city": "Boston",
+      "area": "Fenway",
+      "lat": 42.3467,
+      "lng": -71.0972,
+      "accepted_insurance": [
+        "Cigna",
+        "United",
+        "Medicare"
+      ],
+      "rating": 4.4,
+      "schedule": {
+        "days": [
+          "Tue",
+          "Wed",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC009",
+      "name": "Dr. Laura Martinez",
+      "specialty": "dermatology",
+      "affiliation": "Cambridge Skin Clinic",
+      "city": "Cambridge",
+      "area": "Central Square",
+      "lat": 42.3652,
+      "lng": -71.104,
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "Blue Cross"
+      ],
+      "rating": 4.6,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Wed",
+          "Thu"
+        ],
+        "start": "11:00",
+        "end": "17:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC010",
+      "name": "Dr. Thomas Nguyen",
+      "specialty": "gastroenterology",
+      "affiliation": "Brookline Digestive Health",
+      "city": "Brookline",
+      "area": "Brookline Village",
+      "lat": 42.3326,
+      "lng": -71.121,
+      "accepted_insurance": [
+        "United",
+        "Blue Cross",
+        "Medicare"
+      ],
+      "rating": 4.5,
+      "schedule": {
+        "days": [
+          "Tue",
+          "Thu",
+          "Fri"
+        ],
+        "start": "09:00",
+        "end": "14:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC011",
+      "name": "Dr. Hannah Weiss",
+      "specialty": "psychiatry",
+      "affiliation": "Mindful Care Boston",
+      "city": "Boston",
+      "area": "Beacon Hill",
+      "lat": 42.3588,
+      "lng": -71.0707,
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "United"
+      ],
+      "rating": 4.8,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC012",
+      "name": "Dr. Carlos Mendes",
+      "specialty": "pulmonology",
+      "affiliation": "Harbor Lung & Sleep",
+      "city": "Boston",
+      "area": "Seaport",
+      "lat": 42.3519,
+      "lng": -71.0434,
+      "accepted_insurance": [
+        "Blue Cross",
+        "Medicare",
+        "Aetna"
+      ],
+      "rating": 4.4,
+      "schedule": {
+        "days": [
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "09:00",
+        "end": "13:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC013",
+      "name": "Dr. Fatima Khan",
+      "specialty": "obstetrics and gynecology",
+      "affiliation": "Women's Health Cambridge",
+      "city": "Cambridge",
+      "area": "Porter Square",
+      "lat": 42.3884,
+      "lng": -71.119,
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "Blue Cross",
+        "Medicaid"
+      ],
+      "rating": 4.9,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Fri"
+        ],
+        "start": "09:00",
+        "end": "16:00"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC014",
+      "name": "Dr. Peter Lowe",
+      "specialty": "ent",
+      "affiliation": "Boston ENT Associates",
+      "city": "Boston",
+      "area": "Downtown",
+      "lat": 42.3555,
+      "lng": -71.0605,
+      "accepted_insurance": [
+        "United",
+        "Cigna",
+        "Medicare"
+      ],
+      "rating": 4.2,
+      "schedule": {
+        "days": [
+          "Tue",
+          "Thu"
+        ],
+        "start": "08:30",
+        "end": "13:30"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC015",
+      "name": "Dr. Grace Obi",
+      "specialty": "endocrinology",
+      "affiliation": "Diabetes & Thyroid Center",
+      "city": "Brookline",
+      "area": "Coolidge Corner",
+      "lat": 42.3423,
+      "lng": -71.123,
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.6,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Wed",
+          "Fri"
+        ],
+        "start": "09:30",
+        "end": "15:30"
+      },
+      "slot_minutes": 30
+    },
+    {
+      "id": "DOC016",
+      "name": "Dr. Victor Petrov",
+      "specialty": "emergency medicine",
+      "affiliation": "Boston General ER Clinic",
+      "city": "Boston",
+      "area": "Downtown",
+      "lat": 42.3626,
+      "lng": -71.0689,
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Cigna",
+        "United",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.1,
+      "schedule": {
+        "days": [
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri"
+        ],
+        "start": "08:00",
+        "end": "20:00"
+      },
+      "slot_minutes": 30
+    }
+  ],
+  "facilities": [
+    {
+      "id": "FAC001",
+      "name": "Boston General Hospital Emergency Dept",
+      "type": "emergency room",
+      "city": "Boston",
+      "area": "Downtown",
+      "address": "55 Fruit St, Boston, MA",
+      "lat": 42.3626,
+      "lng": -71.0689,
+      "hours": "24/7",
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Cigna",
+        "United",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.2
+    },
+    {
+      "id": "FAC002",
+      "name": "Cambridge City Hospital Emergency Dept",
+      "type": "emergency room",
+      "city": "Cambridge",
+      "area": "Mount Auburn",
+      "address": "330 Mount Auburn St, Cambridge, MA",
+      "lat": 42.3745,
+      "lng": -71.133,
+      "hours": "24/7",
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Cigna",
+        "United",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.3
+    },
+    {
+      "id": "FAC003",
+      "name": "Back Bay Urgent Care",
+      "type": "urgent care",
+      "city": "Boston",
+      "area": "Back Bay",
+      "address": "200 Newbury St, Boston, MA",
+      "lat": 42.351,
+      "lng": -71.082,
+      "hours": "08:00-22:00",
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "United",
+        "Blue Cross"
+      ],
+      "rating": 4.5
+    },
+    {
+      "id": "FAC004",
+      "name": "Cambridge Walk-In Urgent Care",
+      "type": "urgent care",
+      "city": "Cambridge",
+      "area": "Harvard Square",
+      "address": "18 Brattle St, Cambridge, MA",
+      "lat": 42.374,
+      "lng": -71.121,
+      "hours": "09:00-21:00",
+      "accepted_insurance": [
+        "Blue Cross",
+        "Cigna",
+        "Medicaid"
+      ],
+      "rating": 4.4
+    },
+    {
+      "id": "FAC005",
+      "name": "Brookline Express Care",
+      "type": "urgent care",
+      "city": "Brookline",
+      "area": "Coolidge Corner",
+      "address": "350 Harvard St, Brookline, MA",
+      "lat": 42.342,
+      "lng": -71.1215,
+      "hours": "10:00-20:00",
+      "accepted_insurance": [
+        "Aetna",
+        "United",
+        "Medicare"
+      ],
+      "rating": 4.1
+    },
+    {
+      "id": "FAC006",
+      "name": "Metro Diagnostic Labs - Boston",
+      "type": "diagnostic lab",
+      "city": "Boston",
+      "area": "Fenway",
+      "address": "120 Brookline Ave, Boston, MA",
+      "lat": 42.345,
+      "lng": -71.1,
+      "hours": "07:00-17:00",
+      "accepted_insurance": [
+        "Aetna",
+        "Blue Cross",
+        "Cigna",
+        "United",
+        "Medicare"
+      ],
+      "rating": 4.6
+    },
+    {
+      "id": "FAC007",
+      "name": "Cambridge Imaging & Radiology",
+      "type": "diagnostic lab",
+      "city": "Cambridge",
+      "area": "Kendall Square",
+      "address": "1 Broadway, Cambridge, MA",
+      "lat": 42.3625,
+      "lng": -71.086,
+      "hours": "08:00-18:00",
+      "accepted_insurance": [
+        "Blue Cross",
+        "United",
+        "Medicare",
+        "Medicaid"
+      ],
+      "rating": 4.4
+    },
+    {
+      "id": "FAC008",
+      "name": "Brookline Blood & Pathology Lab",
+      "type": "diagnostic lab",
+      "city": "Brookline",
+      "area": "Brookline Village",
+      "address": "25 Washington St, Brookline, MA",
+      "lat": 42.333,
+      "lng": -71.1205,
+      "hours": "07:30-16:00",
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "Blue Cross"
+      ],
+      "rating": 4.3
+    },
+    {
+      "id": "FAC009",
+      "name": "Seaport 24h Pharmacy & Minute Clinic",
+      "type": "urgent care",
+      "city": "Boston",
+      "area": "Seaport",
+      "address": "10 Seaport Blvd, Boston, MA",
+      "lat": 42.352,
+      "lng": -71.044,
+      "hours": "00:00-23:59",
+      "accepted_insurance": [
+        "Aetna",
+        "Cigna",
+        "United"
+      ],
+      "rating": 3.9
+    }
+  ]
+}
