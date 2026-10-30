@@ -6,3 +6,5 @@ __pycache__/
 .ipynb_checkpoints/
 data/bookings.json
 __pycache__/
+# Local SQLite databases
+*.db
