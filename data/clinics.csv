@@ -1,0 +1,21 @@
+clinic_name,specialty,address,phone,wait_time_mins,rating
+Apollo Orthopedic Care,Orthopedics,Sector 4,555-0101,15,4.8
+City Trauma & ER,Emergency Medicine,Main Ave,555-0112,0,4.9
+Skin & Allergy Wellness,Dermatology,North Rd,555-0123,25,4.6
+CarePoint Pulmonology,Pulmonology,Park St,555-0134,30,4.5
+Metro Family Clinic,General Practice,Cross St,555-0145,10,4.7
+Heartline Cardiac Center,Cardiology,Lake View Rd,555-0156,20,4.8
+Sunrise Pediatrics,Pediatrics,Garden St,555-0167,12,4.9
+NeuroCare Institute,Neurology,Hill Crest Ave,555-0178,35,4.6
+Bone & Joint Clinic,Orthopedics,East Park Rd,555-0189,40,4.4
+Clear Skin Dermatology,Dermatology,Market St,555-0190,18,4.5
+Digestive Health Associates,Gastroenterology,Station Rd,555-0201,28,4.5
+MindWell Psychiatry,Psychiatry,River Side Dr,555-0212,22,4.7
+Women's Wellness Center,Gynecology,Rose Ave,555-0223,16,4.8
+ClearBreath Lung Clinic,Pulmonology,Mill Rd,555-0234,14,4.3
+Quick Care Urgent Clinic,Urgent Care,Central Plaza,555-0245,8,4.2
+Greenfield Family Practice,General Practice,Oak St,555-0256,24,4.4
+Metro General ER,Emergency Medicine,Ring Rd,555-0267,5,4.1
+ENT & Hearing Specialists,ENT,Temple St,555-0278,19,4.6
+Diabetes & Hormone Center,Endocrinology,Canal Rd,555-0289,32,4.7
+Vision Plus Eye Clinic,Ophthalmology,College Rd,555-0290,21,4.6
