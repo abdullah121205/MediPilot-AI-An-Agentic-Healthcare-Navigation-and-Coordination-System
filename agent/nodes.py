@@ -22,19 +22,26 @@ def _parse_json(text: str) -> dict:
     return {}
 
 
+import importlib
+
 def _get_member3_tools() -> Dict[str, Any]:
+    """Dynamically load Member 3's tools without triggering VS Code import warnings."""
     tools = {}
     try:
-        import app.tools as m3_tools
+        # Dynamic import so VS Code doesn't complain when the folder is missing
+        m3_tools = importlib.import_module("app.tools")
         if hasattr(m3_tools, "get_tools"):
             tools.update(m3_tools.get_tools())
-    except ImportError:
+    except (ImportError, ModuleNotFoundError):
         pass
+
+    # Fallback to local tools/ directory
     try:
         from tools import build_tools
         tools.update(build_tools())
     except Exception:
         pass
+
     return tools
 
 
